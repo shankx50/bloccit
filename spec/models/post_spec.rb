@@ -6,11 +6,11 @@ RSpec.describe Post, :type => :model do
   describe "attributes" do
 
     it "responds to title" do
-      expect(post).to respond_to(:title)
+      expect(post).to have_attributes(:title)
     end
 
     it "responds to body" do
-      expect(post).to respond_to(:body)
+      expect(post).to have_attributes(:body)
     end
   end
 end
