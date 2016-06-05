@@ -8,9 +8,6 @@ require 'rails_helper'
     let(:body) { RandomData.random_paragraph }
 
     let(:topic) { Topic.create!(name: name, description: description) }
-
-    let(:post) { topic.posts.create!(title: title, body: body) }
-
     let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
     let(:post) { topic.posts.create!(title: title, body: body, user: user) }
 
@@ -30,10 +27,26 @@ require 'rails_helper'
 
     describe "attributes" do
       it "has a title and body attribute" do
-        #expect(post).to have_attributes(title: title, body: body)
         expect(post.title).to be == title
         expect(post.body).to be == body
         expect(post.user).to be == user
+      end
+    end
+
+    describe "#create_vote" do
+
+      it "creates 1 upvote" do
+        expect(post.up_votes).to eq(1)
+      end
+
+      it "makes user vote" do
+        expect(post.votes.first.user).to eq(user)
+      end
+
+      it "calls create_vote after post creation" do
+        post = topic.posts.create!(title:  RandomData.random_sentence, body: body, user: user)
+        expect(post).to receive(:create_vote)
+        post.save
       end
     end
     describe "voting" do
