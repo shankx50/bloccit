@@ -27,6 +27,7 @@ require 'rails_helper'
     it { is_expected.to validate_length_of(:body).is_at_least(20) }
     it { is_expected.to have_many(:labelings) }
     it { is_expected.to have_many(:labels).through(:labelings) }
+    it { is_expected.to have_many(:favorites) }
 
     describe "attributes" do
       it "has a title and body attribute" do
