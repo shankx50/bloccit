@@ -11,6 +11,12 @@ class Post < ActiveRecord::Base
   validates :body, length: { minimum: 20 }, presence: true
   validates :topic, presence: true
   validates :user, presence: true
+  after_create :auto_follow
+
+  def auto_follow
+    fav = favorites.create!(post_id: id, user_id: user.id)
+    FavoriteMailer.new_post(fav.user, self).deliver_now
+  end
 
   def up_votes
     votes.where(value: 1).count

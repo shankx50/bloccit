@@ -46,7 +46,6 @@ require 'rails_helper'
         @down_votes = post.votes.where(value: -1).count
       end
 
-      # #6
       describe "#up_votes" do
         it "counts the number of votes with value = 1" do
           expect( post.up_votes ).to eq(@up_votes)
