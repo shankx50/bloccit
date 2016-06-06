@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'figaro', '1.0'
 gem 'rails', '4.2.5'
 gem 'bootstrap-sass'
 # Used for encrypting User passwords
