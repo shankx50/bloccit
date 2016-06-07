@@ -7,11 +7,9 @@ require 'rails_helper'
     let(:title) { RandomData.random_sentence }
     let(:body) { RandomData.random_paragraph }
 
-    let(:topic) { Topic.create!(name: name, description: description) }
-
-    let(:post) { topic.posts.create!(title: title, body: body) }
-
-    let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
+    let(:topic) { create(:topic) }
+    let(:user) { create(:user) }
+    let(:post) { create(:post) }
     let(:post) { topic.posts.create!(title: title, body: body, user: user) }
 
     it { is_expected.to have_many(:comments) }
@@ -32,9 +30,9 @@ require 'rails_helper'
     describe "attributes" do
       it "has a title and body attribute" do
         #expect(post).to have_attributes(title: title, body: body)
-        expect(post.title).to be == title
-        expect(post.body).to be == body
-        expect(post.user).to be == user
+        expect(post.title).to be == post.title
+        expect(post.body).to be == post.body
+        expect(post.user).to be == post.user
       end
     end
     describe "voting" do
