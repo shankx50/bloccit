@@ -9,8 +9,8 @@ require 'rails_helper'
 
     let(:topic) { create(:topic) }
     let(:user) { create(:user) }
-    let(:post) { create(:post) }
-    let(:post) { topic.posts.create!(title: title, body: body, user: user) }
+    let(:post) { create(:post, title: title, body: body, user: user) }
+    let(:favorite) { Favorite.create!(post: post, user: user) }
 
     it { is_expected.to have_many(:comments) }
     it { is_expected.to have_many(:votes) }
@@ -33,6 +33,19 @@ require 'rails_helper'
         expect(post.title).to be == post.title
         expect(post.body).to be == post.body
         expect(post.user).to be == post.user
+      end
+    end
+
+    describe "favorited scope filter" do
+      let(:another_post) { create(:post, title: title, body: body, user: user) }
+
+      it "returns a list of posts that the user favorited" do
+        user.favorites << favorite
+        expect(Post.favorited(user).first).to eq(post)
+      end
+
+      it "returns does not return posts that were not favorited" do
+        expect(Post.favorited(user).first).not_to eq(post)
       end
     end
     describe "voting" do

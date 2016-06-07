@@ -104,6 +104,25 @@ RSpec.describe User, type: :model do
     end
   end
 
+# Does not work
+
+  # describe ".has_posts_or_comments" do
+  #   let(:this_user) { create(:user) }
+  #   let(:user_without_posts) { create(:user) }
+  #   let(:this_topic) { create(:topic) }
+  #   let(:this_post) { create(:post, topic:this_topic, user:this_user) }
+  #   let(:comment){ create(:comment, post: this_post, user:this_user)}
+  #
+  #   it "returns true if use has at least one post or comment" do
+  #     expect(this_user.has_posts_or_comments).to be(true)
+  #   end
+  #
+  #   it "returns false if use no post or comment" do
+  #     expect(user_without_posts.has_posts_or_comments).to be(false)
+  #   end
+  # end
+
+
   describe ".avatar_url" do
      let(:known_user) { create(:user, email: "blochead@bloc.io") }
 
@@ -112,4 +131,6 @@ RSpec.describe User, type: :model do
        expect(known_user.avatar_url(48)).to eq(expected_gravatar)
      end
    end
+
+
 end

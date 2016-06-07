@@ -15,6 +15,14 @@ class User < ActiveRecord::Base
   uniqueness: { case_sensitive: false },
   length: { minimum: 3, maximum: 254 }
 
+  def has_posts_or_comments
+    if(posts.count != 0 || comments.count != 0)
+      return true
+    else
+      return false
+    end
+  end
+
   def show
     @user = User.find(params[:id])
   end

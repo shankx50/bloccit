@@ -1,6 +1,6 @@
-<div class="media">
+<div class="media row">
   <%= render partial: 'votes/voter', locals: { post: post } %>
-  <div class="media-body">
+  <div class="media-body col-md-6">
     <h4 class="media-heading">
       <%= link_to post.title, topic_post_path(post.topic, post) %>
       <%= render partial: "labels/list", locals: { labels: post.labels } %>
@@ -9,5 +9,14 @@
       submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %> <br>
       <%= post.comments.count %> Comments
     </small>
+    <% avatar_url = post.user.avatar_url(40) %>
+    <% if avatar_url %>
+    <% end %>
+  </div>
+  <div class="col-md-3">
+    <%= image_tag avatar_url, class: 'media-object' %>
+    Author: <%= post.user.name %><br/>
+    Votes: <%= post.user.votes.count %><br/>
+    Comments: <%= post.user.comments.count %>
   </div>
 </div>
