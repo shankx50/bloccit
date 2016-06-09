@@ -34,14 +34,14 @@ posts = Post.all
 
 # Create Comments
 # #3
-100.times do
-  Comment.create!(
-  # #4
-  post: posts.sample,
-  body: RandomData.random_paragraph,
-  user: users.sample,
-  )
-end
+# 100.times do
+#   Comment.create!(
+#   # #4
+#   post: posts.sample,
+#   body: RandomData.random_paragraph,
+#   user: users.sample,
+#   )
+# end
 
 # Create an admin user
 admin = User.create!(
